@@ -1,9 +1,11 @@
 const express = require('express');
-const Adminroutes=require('./routes/Admin')
 const app= express();
-var port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
+var port = process.env.PORT || 3000;
 app.use(express.json());
+
+
+const Adminroutes=require('./routes/Admin')
 app.use('/api/admin', Adminroutes)
 
 
