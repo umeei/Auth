@@ -1,7 +1,7 @@
 const express = require('express');
 const Adminroutes=require('./routes/Admin')
 const app= express();
-const port=1500;
+var port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 app.use(express.json());
 

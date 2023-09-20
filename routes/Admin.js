@@ -14,12 +14,12 @@ router.post('/',async function(req,res){
 
 })
 router.delete('/',async function(req,res){
-    await adminmodel.findByIdAndDelete();
+    await adminmodel.findByIdAndDelete(req.query);
     res.send("Admin Deleted Successfuly ")
     
 })
 router.put('/',async function(req,res){
-    await adminmodel.findByIdAndUpdate();
+    await adminmodel.findByIdAndUpdate(req.query.id,{$set:req.body});
     res.send("Admin Updated Successfuly ")
 
 })
