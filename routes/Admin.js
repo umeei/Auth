@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const adminmodel = require('../Model/Adminm');
-const Admin =require('../Model/Adminm')
+
 
 
 router.get('/',async function(req,res){
@@ -9,7 +9,7 @@ router.get('/',async function(req,res){
 
 })
 router.get('/records',async function(req,res){
-    var ad=await adminmodel.find();
+    var Admin=await adminmodel.find();
     res.json(Admin)
 
 })
