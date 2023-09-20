@@ -11,7 +11,7 @@ app.use('/api/admin', Adminroutes)
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname+"/public"))
-
+// Here
 
 
 
