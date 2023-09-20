@@ -11,8 +11,10 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname+"/public"))
 
 
+
+
 app.get('/admin_sign_in', function(req,res){
-    res.render(__dirname+"./routes/Admin")
+    res.render(__dirname+"/views/login.ejs")
 
 })
 
