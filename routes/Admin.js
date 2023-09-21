@@ -1,18 +1,96 @@
-const router = require('express').Router()
-const adminmodel = require('../Model/Adminm');
+const router = require('express').Router();
+const jwt = require('jsonwebtoken')
+
+router.post('/' , async function(req, res){
+
+    try{
+        var data={username:"admin", password:"admin123"};
+
+        var admindata=req.body;
 
 
+        if((admindata.username===data.username) && (admindata.password===data.password)){
 
-router.get('/',async function(req,res){
-    await adminmodel.create(req.query);
-    res.send("Admin Logged in successfully");
+            var token= jwt.sign({username:"admin"}, "Elhemredelcoco$$$$%2323",{expiresIn:"40s"})
 
+            res.cookie('accessToken',token,{secure:true, httpOnly:true})
+
+
+            res.json({
+                success:true,
+                message:"You are logged in Successfuly",
+            })
+            
+        }
+        else {
+            res.status(404).json({
+                success : false,
+                message: "Invalid Username or Password"
+
+            })
+        }
+    }
+    catch (error){
+        res,status(505).json({
+            success:false,
+            message:"Soething went Wrong"
+        })
+    }
 })
-router.get('/records',async function(req,res){
-    var Admin=await adminmodel.find();
-    res.json(Admin)
+module.exports=router
 
-})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const adminmodel = require('../Model/Adminm');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// router.get('/',async function(req,res){
+//     await adminmodel.create(req.query);
+//     res.send("Admin Logged in successfully");
+
+// })
+// router.get('/records',async function(req,res){
+//     var Admin=await adminmodel.find();
+//     res.json(Admin)
+
+// })
 // router.delete('/',async function(req,res){
 //     await adminmodel.findByIdAndDelete(req.query);
 //     res.send("Admin Deleted Successfuly ")
@@ -25,5 +103,3 @@ router.get('/records',async function(req,res){
 // })
 
 
-
-module.exports=router

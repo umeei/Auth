@@ -20,6 +20,39 @@ app.get('/admin_sign_in', function(req,res){
 
 })
 
+app.set('/login', function(req,res){
+
+    if(req.cookies.accessToken){
+        try{
+            var isTokenvalid = jwt.verify(req.cookie.accessToken, "Elhemredelcoco$$$$%2323")
+            res.redirect('/dashboard');
+        }
+        catch(error){
+
+        }
+    }
+
+    res.render(__dirname+"/views/login.ejs")
+        
+})
+
+app.set('/dashboard', function(req,res){
+    if(req.cookies.accessToken){
+        try {
+            isTokenvalid=jwt.verify(req.cookie.accessToken,"Elhemredelcoco$$$$%2323")
+            console.log(isTokenvalid);
+        }
+        catch(error){
+            res.redirect("/login")
+        }
+    }
+    else{
+        res.redirect('/login')
+    }
+
+    res.render(__dirname + "/views/dashboard.ejs")
+})
+
 
 mongoose.connect("mongodb+srv://umairjutt2025:umairjutt2025@umair-cluster.oducycs.mongodb.net/adminn?retryWrites=true&w=majority").then((res)=>{
     console.log("DataBase is connected");
