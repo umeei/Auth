@@ -42,7 +42,7 @@ app.get('/login', function(req,res){
         
 })
 
-app.set('/dashboard', function(req,res){
+app.get('/dashboard', function(req,res){
     if(req.cookies.accessToken){
         try {
             isTokenvalid=jwt.verify(req.cookies.accessToken,"Elhemredelcoco$$$$%2323")
