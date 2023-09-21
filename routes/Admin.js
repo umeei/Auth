@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const jwt = require('jsonwebtoken')
 
-router.post('/' , async function(req, res){
+router.post('/login' , async function(req, res){
 
     try{
         var data={username:"admin", password:"admin123"};
@@ -31,7 +31,7 @@ router.post('/' , async function(req, res){
         }
     }
     catch (error){
-        res,status(505).json({
+        res.status(500).json({
             success:false,
             message:"Soething went Wrong"
         })

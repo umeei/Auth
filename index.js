@@ -2,7 +2,13 @@ const express = require('express');
 const app= express();
 const mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
+var cookieparser= require('cookie-parser');
+const jwt = require('jsonwebtoken')
+
+
 app.use(express.json());
+
+app.use(cookieparser());
 
 
 const Adminroutes=require('./routes/Admin')
@@ -15,16 +21,16 @@ app.use(express.static(__dirname+"/public"))
 
 
 
-app.get('/admin_sign_in', function(req,res){
-    res.render(__dirname+"/views/login.ejs")
+app.get('/', function(req,res){
+    res.render(__dirname+"/views/home.ejs")
 
 })
 
-app.set('/login', function(req,res){
+app.get('/login', function(req,res){
 
     if(req.cookies.accessToken){
         try{
-            var isTokenvalid = jwt.verify(req.cookie.accessToken, "Elhemredelcoco$$$$%2323")
+            var isTokenvalid = jwt.verify(req.cookies.accessToken, "Elhemredelcoco$$$$%2323")
             res.redirect('/dashboard');
         }
         catch(error){
@@ -39,7 +45,7 @@ app.set('/login', function(req,res){
 app.set('/dashboard', function(req,res){
     if(req.cookies.accessToken){
         try {
-            isTokenvalid=jwt.verify(req.cookie.accessToken,"Elhemredelcoco$$$$%2323")
+            isTokenvalid=jwt.verify(req.cookies.accessToken,"Elhemredelcoco$$$$%2323")
             console.log(isTokenvalid);
         }
         catch(error){
